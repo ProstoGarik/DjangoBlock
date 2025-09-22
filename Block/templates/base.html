@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'posts' %}">Посты</a>
+            <a href="{% url 'about' %}">О сайте</a>
+            <a href="{% url 'login' %}">Вход</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <span>&copy 2025. Мой блог.</span>
+    </footer>
+</body>
+</html>
