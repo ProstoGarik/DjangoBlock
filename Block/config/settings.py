@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'posts',
+    'myusers',
 ]
 
 MIDDLEWARE = [
@@ -98,3 +99,8 @@ STATIC_URL = 'static/'
 # Default primary key field type
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL  = '/posts/'
+LOGOUT_REDIRECT_URL = '/login/'
+
+AUTH_USER_MODEL = 'myusers.User'

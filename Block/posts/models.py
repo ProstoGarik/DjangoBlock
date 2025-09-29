@@ -1,24 +1,28 @@
 from django.db import models
+from myusers.models import User
 
 class Post(models.Model):
     title = models.CharField(
-        verbose_name= 'заголовок',
-        max_length = 128,
+        max_length=100,
     )
-
-    text = models.TextField(
-        verbose_name= 'Текст',
-        max_length = 512,
+    content = models.TextField()
+    author = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
     )
-
-    created = models.DateTimeField(
-        verbose_name= 'Создано',
+    created_at = models.DateTimeField(
         auto_now_add=True,
     )
-
-    updated = models.DateTimeField(
-        verbose_name= 'Изменено',
+    updated_at = models.DateTimeField(
         auto_now=True,
+    )
+
+    author = models.ForeignKey(
+        to=User,
+        verbose_name='Автор Поста',
+        on_delete=models.CASCADE,
+        related_name='posts'
     )
 
     def __str__(self):
