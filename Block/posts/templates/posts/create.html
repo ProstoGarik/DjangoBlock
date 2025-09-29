@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <h1>Создать пост</h1>
+
+    {% if error %}
+        <p> style='color:red'{{error}}</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="title">Заголовок</label>
+        <input type="text" id="title">
+        <br>
+        <label for="text">Текст:</label>
+        <textarea name="text" id="title"></textarea>
+        <br>
+        <button type="submit">Сохранить</button>
+    </form>
+{% endblock %}
