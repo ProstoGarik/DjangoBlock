@@ -1,0 +1,18 @@
+<h1>Заметки</h1>
+{% if user.is_authenticated %}
+    <p><a href="{% url 'logout' %}">Выйти</a></p>
+{% else %}
+    <p><a href="{% url 'login' %}">Вход</a> or <a href="{% url 'register' %}">Регистрация</a></p>
+{% endif %}
+<ul>
+{% for note in notes %}
+    <li>
+        <h3>{{ note.title }}</h3>
+        <p>{{ note.content }}</p>
+        <small>Создано: {{ note.created }}</small><br>
+        <small>Обновлено: {{ note.updated }}</small>
+    </li>
+{% empty %}
+    <li>Заметок нет.</li>
+{% endfor %}
+</ul>

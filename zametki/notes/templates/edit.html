@@ -1,0 +1,19 @@
+<h1>Изменение заметки</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    
+    <div>
+        <label for="title">Заголовок:</label>
+        <input type="text" id="title" name="title" value="{{ note.title }}" maxlength="256" required>
+    </div>
+    
+    <div>
+        <label for="content">Содержание:</label>
+        <textarea id="content" name="content" rows="5" cols="50" maxlength="512" required>{{ note.content }}</textarea>
+    </div>
+    
+    <button type="submit">Изменить</button>
+</form>
+
+<a href="{% url 'note-list' %}">Отмена</a>
