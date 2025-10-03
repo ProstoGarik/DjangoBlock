@@ -6,9 +6,9 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def notes(request):
-    notes = Note.objects.all()
-    return render(request, "notes.html", {'notes':  notes })
-
+    # Only get notes for the current user
+    notes = Note.objects.filter(user=request.user)
+    return render(request, "notes.html", {'notes': notes})
 
 @login_required
 def create(request):
@@ -16,11 +16,13 @@ def create(request):
         title = request.POST.get('title')
         content = request.POST.get('content')
         
+        # Create note with current user
         Note.objects.create(
             title=title,
             content=content,
             created=timezone.now(),
-            updated=timezone.now()
+            updated=timezone.now(),
+            user=request.user  # Add current user
         )
         return redirect('note-list')
     
@@ -28,7 +30,8 @@ def create(request):
 
 @login_required
 def edit(request, id):
-    note = get_object_or_404(Note, id=id)
+    # Only allow editing notes that belong to current user
+    note = get_object_or_404(Note, id=id, user=request.user)
     
     if request.method == 'POST':
         note.title = request.POST.get('title')
@@ -41,6 +44,7 @@ def edit(request, id):
 
 @login_required
 def delete(request, id):
-    note = get_object_or_404(Note, id=id)
+    # Only allow deleting notes that belong to current user
+    note = get_object_or_404(Note, id=id, user=request.user)
     note.delete()
     return redirect('note-list')
